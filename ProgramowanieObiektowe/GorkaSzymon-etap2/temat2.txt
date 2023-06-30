@@ -1,0 +1,15 @@
+W projekcie podjalem sie realizacji zadania z fabryka samochodow.
+Program wita sie z nami piszac "witamy w fabryce samochodow", oraz przedstawiajac nam 7 elemetowy panel nawigacyjny, w ktorym:
+1) mozna wywolac metode w klasie Fabryka ktora sprawia ze auto zaczyna "jezdzic", auto sprawdza czy w baku ma paliwo, gdy nie ma zalacza sie metoda klasy Auto do tankowania,
+2) w tym punkcie mozemy sorzedac samochod jednoczesnie usowajac go z wektora klasy Fabryka a pozostale samochody przedstawic za pomoca przeladowanej operacji przypisania,
+3) "stworzenie nowego samochodu" pozwala nam stworzyc nowy samochod urzywajac przeladowanego operatora istream, wprowadzamy besposrednio marke model i cene oddzielajac je bialymi znakami. Nastepnie poprzez metode klasy vector umieszczam nowe auto na koncu vectora,
+4) w tym punkcie za pomoca for zakresowego w prosty sposob nastepuje wypisanie wszystkich samochodow wyprodukowanych czekajacych na sprzedaz, w tym celu korzystamy takze z przladowanefo operatora ostream zadeklarowanej w klasie Auto,
+5) otwiera nam plik o nazwie "nazwa_pliku.txt" nadpisujac zawartosc, do pliku mozemy zapisywac zawartosc oraz z niego czytac, do zapisania zawartosci fabryki do pliku posluzylem sie uprzednio przeladowanym operatorem ostream
+6) podobnie jak w punkcie wyzej wczytujemy zawartosc pliku do programu korzystajac z przeladowanego operatora istream, nalezy podac ilosc elementow, metoda tworzy nowe samochody,
+7) wciskajac 7 konczymy prace, gdy nie zapisalismy wynikow pracy zostaje ona utracona.
+
+w drugiej części projektu stworzyłem klasę wirtualną pojazd, z której dziedziczy rower oraz pojazd mechaniczny, z kolei
+z pojazdu mechanicznego dziedziczy klasa samochód oraz motocykl, stworzyłem nową klasę komis, która skupuje samochody od klientów w zanirzonej cenie a w przypadku samochodu marki izera cofa licznki także o połowe.
+w funkcji main załączyłem argumenty umożliwiające czytanie komend z pliku, w przypadku braku pliku program czyta komendy ze standardowego źródła.
+
+w trzeciej części zamieściłęm instrukcję rzucającą wyjątki w karzdej przeładowanej funkcji wejścia stworzyłęm szablon fabryk umożliwiający tworzenie wszystkich pojazdów
