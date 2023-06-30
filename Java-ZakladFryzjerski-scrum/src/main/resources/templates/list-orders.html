@@ -1,0 +1,65 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>List Orders</title>
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>List Orders</h2>
+    <br>
+    <a th:href="@{/orderProduct}" class="btn btn-primary mb-2">Order Product</a>
+    <br/><br/>
+
+    <table class="table table-bordered table-striped" id="orders-table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Manufacturer</th>
+            <th>Model</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="orders: ${orders}">
+            <td th:text="${orders.id}" />
+            <td th:text="${orders.manufacturer}" />
+            <td th:text="${orders.model}" />
+            <td th:text="${orders.amount}" />
+            <td>
+                <a th:href="@{/deleteOrder(orderId=${orders.id})}" class="btn btn-danger ml-2 modal-dialog-centered">Delete order</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#orders-table").DataTable({
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }]
+            });
+        })
+    </script>
+
+    <hr/>
+    <a th:href="@{/showProducts}">Show products</a>
+</div>
+
+</body>
+
+</html>

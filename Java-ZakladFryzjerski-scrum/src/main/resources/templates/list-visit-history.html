@@ -1,0 +1,86 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>List Visit History</title>
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<a th:href="@{/}" class="btn btn-info">Home</a>
+
+<div class="container">
+
+    <h2>List Visit History</h2>
+    <br>
+    <a th:href="@{/searchVisitHistory}" class="btn btn-primary mb-2">Search Visit History</a>
+    <br/><br/>
+
+    <table class="table table-bordered table-striped" id="visit-history-table">
+        <thead>
+        <tr>
+            <th>Visit Id</th>
+            <th>Customer Id</th>
+            <th>Employee Id</th>
+            <th>Customer Name</th>
+            <th>Customer Surname</th>
+            <th>Gender</th>
+            <th>Date</th>
+            <th>Hour</th>
+            <th>Service</th>
+            <th>Presence</th>
+            <th>Additional Information</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="visit_history: ${visit_history}">
+            <td th:text="${visit_history.visit_id}" />
+            <td th:text="${visit_history.customer_id}" />
+            <td th:text="${visit_history.employee_id}" />
+            <td th:text="${visit_history.customer_name}" />
+            <td th:text="${visit_history.customer_surname}" />
+            <td th:text="${visit_history.gender}" />
+            <td th:text="${#dates.format(visit_history.date, 'dd/MM/yyyy')}" />
+            <td th:text="${#dates.format(visit_history.hour, 'HH:mm')}" />
+            <td th:text="${visit_history.service}" />
+            <td>
+                <a th:if="${visit_history.presence}">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+                <a th:unless="${visit_history.presence}">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </td>
+            <td th:text="${visit_history.additional_info}" />
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#visit-history-table").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1] /* 1st one, start by the right */
+            }],
+            "order": [
+                [ 6, "desc"]
+            ],
+        });
+    })
+</script>
+
+</body>
+
+</html>

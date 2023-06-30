@@ -1,0 +1,47 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Search Visit History</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+    <style>
+        input {margin-bottom: 10px; width: 300px;}
+        h1 {font-weight: bold;
+            font-size: 15px;
+            color: #007bff;}
+    </style>
+</head>
+<body>
+
+<a th:href="@{/}" class="btn btn-info">Home</a>
+
+<div class="container">
+
+    <h3>Search Visit History</h3>
+    <h1>You can find a visit history record(s)<br> by choosing one or more parameters</h1>
+    <hr/>
+
+    <form th:action="@{/findVisitHistory}" method="get">
+            <input type="text" name="keyword1" th:value="${keyword1}"  placeholder="Enter Visit ID" /><br>
+            <input type="text" name="keyword2" th:value="${keyword2}"  placeholder="Enter Customer ID" /><br>
+            <input type="text" name="keyword3" th:value="${keyword3}"  placeholder="Enter Employee ID" /><br>
+            <input type="text" name="keyword4" th:value="${keyword4}"  placeholder="Enter Customer Name" /><br>
+            <input type="text" name="keyword5" th:value="${keyword5}"  placeholder="Enter Customer Surname" /><br>
+            <input type="text" name="keyword6" th:value="${keyword6}"  placeholder="Enter Gender" /><br>
+            <input type="text" name="keyword7" th:value="${keyword7}"  placeholder="Enter Date in format dd/mm/yyyy" /><br>
+            <input type="text" name="keyword8" th:value="${keyword8}"  placeholder="Enter Hour in format hh:mm" /><br>
+            <input type="text" name="keyword9" th:value="${keyword9}"  placeholder="Enter Service" /><br>
+            <input type="text" name="keyword10" th:value="${keyword10}"  placeholder="Enter Presence (0 or 1)" /><br>
+
+            <button type="submit" class="btn btn-primary col-2">Search</button>
+
+    </form>
+    <hr/>
+    <a th:href="@{/showVisitHistory}">Back to the list of all visit history</a>
+</div>
+
+</body>
+</html>

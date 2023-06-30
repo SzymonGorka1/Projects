@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">>
+<head>
+  <meta charset="utf-8">
+  <title>Welcome!</title>
+  <style>
+    .title {
+      float: left;
+      font-size: 25px;
+      text-shadow: 1px 1px 3px;
+    }
+
+    .close {
+      width: 200px;
+      float: right;
+    }
+
+    .close button {
+      background-color: rgba(255, 0, 0, 0.7);
+    }
+
+    .close button:hover {
+      background-color: rgb(255, 0, 0);
+    }
+
+    body {
+      background-color: #d9d9d9;
+    }
+
+    div.image {
+      height: 250px;
+      width: 250px;
+      border-style: hidden;
+      margin: 0 auto;
+      object-fit: cover;
+      background-color: gray;
+      position: cover;
+      border-radius: 250px;
+      margin-bottom: 20px;
+    }
+
+    div.buttons {
+      background-color: rgba(0, 0, 0, 0.7);
+      margin: 0 auto;
+      text-align: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-gap: 1rem;
+      padding: 20px;
+      width: 1000px;
+      border-radius: 20px;
+      margin-top: 25px;
+    }
+
+    div.info {
+      width: 300px;
+      margin: 0 auto;
+      background-color: rgba(112, 112, 112, 0.7);
+      border-radius: 20px;
+    }
+
+    p {
+      text-align: center;
+      border-color: #663100;
+      font-size: 30px;
+      margin: 0 auto;
+      padding: 5px 5px;
+    }
+
+    button {
+      font-size: 35px;
+      background-color: #4a4aff;
+      font-weight: bold;
+      border-radius: 10px;
+      padding: 15px 32px;
+      cursor: pointer;
+      box-shadow: 5px 7px 10px;
+    }
+
+    button:hover {
+      background-color: blue;
+      box-shadow: 7px 10px 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class = "title">
+  <h>Hair Studio Inc.</h>
+</div>
+
+<div class = "close">
+  <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+</div>
+
+<div class="image">
+</div>
+<!---->
+<div class = "info">
+  <p>Username <span sec:authentication="principal.username"> User</span></p>
+</div>
+
+<div class = "buttons">
+  <a href="/showProducts"><button id = "prod_list">Product List</button></a>
+  <a href="/showVisitHistory"><button id = "history">Visit History</button></a>
+  <a href="/inProgress"><button id = "my_schedule">My Schedule</button></a>
+  <a href="/showEquipment"><button id = "equip_list">Equipment List</button></a>
+  <a href="/showBooking"><button id = "visit">Visit List</button></a>
+  <a href="/showEmployeesSchedule"><button id = "work_schedule">Work Schedule</button></a>
+  <a href="/showAvailabilitySchedule"><button id = "av_schedule">Avaliability Schedule</button></a>
+</div>
+
+<div class = "buttons">
+  <h1>OWNER MENU</h1>
+  <a href="/registration"><button id = "registration">Add new user</button></a>
+</div>
+
+</body>

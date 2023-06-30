@@ -1,0 +1,279 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>List Equipment</title>
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+    <style>
+        /* Przycisk otwierający zgłoszenie - teraz na środku strony */
+        .open-button {
+            background-color: #555;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 50%;
+            right: 50%;
+            width: 280px;
+            margin-right: -140px;
+        }
+
+        form-container .close {
+            position: absolute;
+            right: 32px;
+            top: 32px;
+            width: 32px;
+            height: 32px;
+            opacity: 0.3;
+        }
+
+        /* Formularz w postaci okna podręcznego - domyślnie ukryty */
+        .form-popup {
+            display: none;
+            position: fixed;
+            bottom: 50%;
+            right: 50%;
+            border: 3px solid #f1f1f1;
+            box-shadow: 2px 2px 4px #000000;
+            border-radius: 5px;
+            z-index: 9;
+            margin-right: -250px;
+            margin-bottom: -250px;
+            overflow-y: scroll !important;
+            max-height: 500px;
+        }
+
+        /* Styl kontenera formularza */
+        .form-container {
+            max-width: 500px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        /* Styl okienek, gdzie wprowadzane są dane */
+        .form-container input[type=text], .form-container select, .form-container textarea, .form-container input[type=date] {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0 22px 0;
+            border: 1px solid black;
+            background: #EFF1F1;
+            text-align: left;
+        }
+
+        /* Styl nagłówków okienek z danymi */
+        .form-container label {
+            font-size: 15px;
+            font-weight: normal;
+        }
+
+        /* Styl nagłówka formularza */
+        .form-container h1 {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        /* Styl nagłówków sekcji */
+        .form-container h2, h3 {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .form-container h4 {
+            font-weight: normal;
+            font-size: 10px;
+        }
+
+        /* Kiedy na okienko klikniemy myszką */
+        .form-container input[type=text]:focus, .form-container select:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        /* Styl dla przycisku 'Zatwierdź' */
+        .form-container .btn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px 20px;
+            border: 1px 1px black;
+            cursor: pointer;
+            width: 49%;
+            margin-bottom:10px;
+            opacity: 0.8;
+        }
+
+        /* Styl dla przycisku 'Anuluj' - nadpisuję tylko kolor */
+        .form-container .cancel {
+            background-color: red;
+        }
+
+        /* Styl dla przycisku 'zamknij' - krzyżyk */
+        .form-container .close {
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            width: 32px;
+            height: 32px;
+            opacity: 0.3;
+            border: none;
+            background-color: fff;
+        }
+
+        .form-container .close:before, .form-container .close:after {
+            position: absolute;
+            top: -4px;
+            left: 13px;
+            content: ' ';
+            height: 33px;
+            width: 2px;
+            background-color: #333;
+        }
+
+        .form-container .close:before {
+            transform: rotate(45deg);
+        }
+
+        .form-container .close:after {
+            transform: rotate(-45deg);
+        }
+
+        /* Po najechaniu myszką znika przezroczystość */
+        .form-container .btn:hover, .open-button:hover, .close:hover {
+            opacity: 1;
+        }
+
+        .form-container .data {
+            font-weight: bold;
+            font-size: 110%;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>List All Equipment</h2>
+    <br>
+    <a th:href="@{/listBrokenEquipment}" class="btn btn-primary mb-2">List broken equipment</a>
+    <br/><br/>
+
+    <table class="table table-bordered table-striped" id="equipment-table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Manufacturer</th>
+            <th>Condition</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="equipment: ${equipment}">
+            <td th:text="${equipment.id}" />
+            <td th:text="${equipment.name}" />
+            <td th:text="${equipment.manufacturer}" />
+            <td th:text="${equipment.cond}" />
+            <td>
+                <a th:if="${equipment.cond == 'Working'}" th:href="@{/changeToDefective(equipmentId=${equipment.id})}" class="btn btn-danger ml-2 modal-dialog-centered" onclick="openForm()">Report equipment</a>
+                <a th:if="${equipment.cond == 'Defective'}" th:href="@{/changeToWorking2(equipmentId=${equipment.id})}" class="btn btn-success ml-2 modal-dialog-centered">Change to working</a>
+
+                <div class="form-popup" id="myForm">
+                    <form th:action="@{/saveReport}" th:object="${report}" method="POST" class="form-container">
+                        <button type="button" class="close" onclick="closeForm()"></button>
+                        <h1>Report damaged equipment</h1>
+                        <!--Okienko 1-->
+                        <label for="salon">Choose salon<b>*</b></label>
+                        <select name="salon" id="salon" required>
+                            <option value="" selected disabled hidden>Choose</option>
+                            <option value="Suwalki">Salon Suwalki</option>
+                            <option value="Czestochowa">Salon Czestochowa</option>
+                            <option value="Sandomierz">Salon Sandomierz</option>
+                            <option value="Walbrzych">Salon Walbrzych</option>
+                        </select>
+
+                        <h2>Information about damaged equipment</h2>
+                        <!--Okienko 2-->
+                        <label for="name">Name<b>*</b> </label>
+                        <input type="text" placeholder="Type name of the equipment" id="name" name="name" required>
+                        <br>
+                        <!--Okienko 3-->
+                        <label for="manufacturer">Manufacturer </label>
+                        <input type="text" placeholder="Type manufacturer of the equipment" id="manufacturer" name="manufacturer">
+                        <br>
+                        <!--Okienko 4-->
+                        <label for="model">Model</label>
+                        <input type="text" placeholder="Type equipment model" id="model" name="model">
+
+                        <h3>Other options</h3>
+                        <!--Okienko 5-->
+                        <label for="workplace">Select where the equipment is being used</label>
+                        <select name="workplace" id="workplace">
+                            <option value="" selected disabled hidden>Choose</option>
+                            <option value="Women's haircut">Women's haircut</option>
+                            <option value="Men's haircut">Men's haircut</option>
+                            <option value="Hair coloring">Hair coloring</option>
+                            <option value="Hairstyling">Hairstyling</option>
+                        </select>
+                        <!--Okienko 6 z datą-->
+                        <label>When the equipment was damaged?<b>*</b>
+                            <input type="text" name="date_of_damage" placeholder="Type date of damage" required/>
+                        </label>
+                        <!--Okienko 7-->
+                        <label for="priority">Priority of registration<b>*</b></label>
+                        <select name="priority" id="priority" required>
+                            <option value="" selected disabled hidden>Choose priority</option>
+                            <option value="1">Low</option>
+                            <option value="2">Medium</option>
+                            <option value="3">High</option>
+                        </select>
+                        <p><label for="description">Description of damage</label></p>
+                        <textarea id="description" name="description" rows="4" cols="50">You can type what happened</textarea>
+                        <!--Okienko 9-->
+                        <p><label for="info">Additional informations</label></p>
+                        <textarea id="info" name="info" rows="4" cols="50">You can specify more info to boost repair process</textarea>
+
+                        <h4><b>*</b> - Required</h4>
+                        <!--Przycisk 'Zatwierdź' i 'Anuluj'-->
+                        <button type="submit" class="btn">Cofirm</button>
+                        <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+                    </form>
+                </div>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#equipment-table").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1] /* 1st one, start by the right */
+            }]
+        });
+    })
+
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>
+
+</body>
+
+</html>

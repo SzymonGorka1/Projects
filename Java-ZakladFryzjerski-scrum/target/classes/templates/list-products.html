@@ -1,0 +1,67 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>List Products</title>
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>List Products</h2>
+    <br>
+    <a th:href="@{/addProductForm}" class="btn btn-primary mb-2">Add Product</a>
+    <br>
+    <a th:href="@{/orderProduct}" class="btn btn-primary mb-2">Order Product</a>
+    <br/><br/>
+
+    <table class="table table-bordered table-striped" id="product-table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Manufacturer</th>
+            <th>Model</th>
+            <th>Actions</th>
+<!--            <th>Actions</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product: ${products}">
+            <td th:text="${product.id}" />
+            <td th:text="${product.manufacturer}" />
+            <td th:text="${product.model}" />
+            <td>
+                <a th:href="@{/deleteProduct(productId=${product.id})}" class="btn btn-danger ml-2 modal-dialog-centered">Delete</a>
+            </td>
+<!--            <td>-->
+<!--                <a th:href="@{/orderProduct(productId=${product.id})}" class="btn btn-primary ml-2 modal-dialog-centered">Order</a>-->
+<!--            </td>-->
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#product-table").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1] /* 1st one, start by the right */
+            }]
+        });
+    })
+</script>
+
+</body>
+
+</html>
