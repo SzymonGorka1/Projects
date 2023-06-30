@@ -1,3 +1,0 @@
-C:/Users/szymo/CLionProjects/GorkaSzymon-etap2/cmake-build-debug/CMakeFiles/GorkaSzymon-etap2.dir
-C:/Users/szymo/CLionProjects/GorkaSzymon-etap2/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/szymo/CLionProjects/GorkaSzymon-etap2/cmake-build-debug/CMakeFiles/rebuild_cache.dir

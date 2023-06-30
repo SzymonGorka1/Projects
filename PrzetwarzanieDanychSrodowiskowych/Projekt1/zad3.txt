@@ -1,6 +1,0 @@
-"";"Okres";"Srednia";"Mediana";"Odchylenie_standardowe";"Minimum";"Maximum";"Rozstep_miedzykwartylowy"
-"1";"Wiosna";7,8;7,93;1,27;5;10,13;1,57
-"2";"Lato";17,09;16,97;1,02;15,07;19,13;1,43
-"3";"Jesien";8,42;8,33;1,06;6,3;10,6;1,7
-"4";"Zima";-1,84;-1,6;1,95;-8,27;1,57;2,53
-"5";"Okr_weg";15,47;15,48;0,87;13,44;17,3;1,26
