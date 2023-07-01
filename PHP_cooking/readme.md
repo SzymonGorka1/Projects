@@ -2,7 +2,8 @@
 
 Execute ```source php.env``` to load the environment.
 
-Cook and Connect Application - Readme
+Cook and Connect Application
+
 Welcome to the Cook and Connect application! This application is designed for individuals who want to learn how to cook but lack specific recipe ideas, and also wish to meet new people. Below, you will find a project description and instructions on how to use the application.
 
 Project Description
