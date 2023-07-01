@@ -1,5 +1,6 @@
-Repozytorium projektów z Geoinformatyki
-Witaj w repozytorium projektów z Geoinformatyki! To miejsce, w którym znajdziesz różnorodne projekty wykonane w czasie studiów na kierunku Geoinformatyka. Poniżej przedstawiam krótki opis repozytorium oraz wskazówki dotyczące korzystania z zawartości.
+Geoinformatics Projects Repository
 
-Opis repozytorium
-To repozytorium zostało stworzone w celu gromadzenia i udostępniania projektów związanych z Geoinformatyką. Zawiera różnorodne projekty, które obejmują różne aspekty geoinformatyki, takie jak analiza danych przestrzennych, modelowanie terenu, systemy informacji geograficznej (GIS) i wiele innych. Każdy projekt jest umieszczony w osobnym folderze, który zawiera pliki, dokumentację i ewentualnie dodatkowe zależności.
+Welcome to the Geoinformatics Projects Repository! This is the place where you will find diverse projects completed during studies in the field of Geoinformatics. Below, you will find a brief description of the repository.
+
+Repository Description
+This repository has been created for the purpose of collecting and sharing projects related to Geoinformatics. It encompasses various projects covering different aspects of geoinformatics, such as programming in C++, Java, PHP, spatial data analysis, modeling, and much more. Each project is located in a separate folder, which contains files, documentation, and, if necessary, additional dependencies.
